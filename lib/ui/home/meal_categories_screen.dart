@@ -67,7 +67,7 @@ class _MealCategoriesScreenState extends State<MealCategoriesScreen> {
           children: _categories.map((Category c) {
             return  CategoryCard(
               title: c.name,
-              imageSrc: "assets/icons/Meditation.svg",
+              imageSrc: c.categoryThumbnail,
               press: () {
                 _onCategoryTap(c);
               },
@@ -85,7 +85,7 @@ class _MealCategoriesScreenState extends State<MealCategoriesScreen> {
           children: _categories.map((Category c) {
             return  CategoryCard(
               title: c.name,
-              imageSrc: "assets/icons/Meditation.svg",
+              imageSrc: c.categoryThumbnail,
               press: () {
                 _onCategoryTap(c);
               },
