@@ -94,7 +94,7 @@ class _BackdropState extends State<Backdrop>
     _controller = AnimationController(
       duration: Duration(milliseconds: 300),
       value: 0,
-      vsync: this,
+      // vsync: this,
     );
   }
 

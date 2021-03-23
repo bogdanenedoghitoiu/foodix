@@ -3,6 +3,7 @@ import 'dart:convert' show json, utf8;
 import 'dart:io';
 
 import 'package:foodix/data/model/category.dart';
+import 'package:foodix/data/model/meal.dart';
 
 class ApiClient {
   final HttpClient _httpClient = HttpClient();
@@ -10,7 +11,6 @@ class ApiClient {
 
   Future<List<Category>> getAllCategories() async {
     final uri = Uri.https(_baseURL, '/api/json/v1/1/categories.php');
-    // final uri = Uri.https(_baseURL, '/api/json/v1/1/categories.php', {'c' : 'list'});
     final jsonResponse = await _getJson(uri);
     if (jsonResponse == null || jsonResponse['categories'] == null) {
       print('Error retrieving the categories.');
@@ -23,6 +23,22 @@ class ApiClient {
     }
 
     return categories;
+  }
+
+  Future<List<Meal>> getMeals(Category category) async {
+    final uri = Uri.https(_baseURL, '/api/json/v1/1/filter.php', {'c' : category.name});
+    final jsonResponse = await _getJson(uri);
+    if (jsonResponse == null || jsonResponse['meals'] == null) {
+      print('Error retrieving the meals filtered by category.');
+      return null;
+    }
+
+    final meals = <Meal>[];
+    for (var m in jsonResponse['meals']) {
+      meals.add(Meal.fromJson(m));
+    }
+
+    return meals;
   }
 
   // Fetches and decodes a JSON object represented as a Dart [Map].

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:foodix/data/api/api_client.dart';
 import 'package:foodix/data/model/category.dart';
+import 'package:foodix/data/model/meal.dart';
 import 'package:meta/meta.dart';
 
 class MealRepository {
@@ -13,4 +14,7 @@ class MealRepository {
     return apiClient.getAllCategories();
   }
 
+  Future<List<Meal>> getMeals(Category category) async {
+    return apiClient.getMeals(category);
+  }
 }
